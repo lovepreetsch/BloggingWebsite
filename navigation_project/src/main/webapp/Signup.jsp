@@ -11,10 +11,7 @@
             background-color: #04274d;
             margin: 0;
         }
-        #table{
-            margin: 0 10px;
 
-        }
         #signup-section{
             color: white;
             display: flex;
@@ -36,6 +33,10 @@
             margin: 20px 160px;
             font-weight: bold;
         }
+        #table{
+            margin: 0 10px;
+
+        }
         #signup-section form table tr td{
             font-size: 23px;
             width: 100%;
@@ -49,7 +50,7 @@
         }
         #submit input[type="submit"] {
             padding: 10px 40px;
-            margin: 40px 200px;
+            margin: 20px 200px;
             font-size: 20px;
             background-color: #04274d;
             color: #fff;
@@ -60,49 +61,61 @@
         #submit input[type="submit"]:hover {
                 background-color: #052e58;
       }
+      #login{
+        
+        justify-content: center;
+        display: flex;
+      }
+      #login a{
+        text-decoration: none;
+      }
     </style>
 
 </head>
 <body>
     <section id="signup-section">
-        <form action="Signup" method="post">
+        <form action="Signup">
             <h2>Sign Up</h2>
         <div id="table">
             <table>
                 <tr class="first_name">
                     <td>First Name:</td>
-                    <td><input type="text" name="firstname" id="firstname" placeholder="Enter First name"></td>
+                    <td><input type="text" name="firstname" id="firstname" placeholder="Enter first name"></td>
                 </tr>
                 <tr class="last_name">
                     <td>Last Name:</td>
-                    <td><input type="text" name="lastname" id="lastname" placeholder="Enter Last name"></td>
+                    <td><input type="text" name="lastname" id="lastname" placeholder="Enter last name"></td>
                 </tr>
                 <tr class="email">
                     <td>Email:</td>
-                    <td><input type="email" name="email" id="email" placeholder="Enter Email" required></td>
+                    <td><input type="email" name="email" id="email" placeholder="Enter email" required></td>
                 </tr>
                 <tr class="contact">
                     <td>Contact:</td>
-                    <td><input type="number" name="contact" id="contact" maxlength="10" oninput="this.value = this.value.slice(0, this.maxLength);"  placeholder="Enter Mobile" required></td>
+                    <td><input type="number" name="mobile" id="mobile" maxlength="10" oninput="this.value = this.value.slice(0, this.maxLength);"  placeholder="Enter number" required></td>
                 </tr>
                 <tr class="password">
                     <td>Password:</td>
-                    <td><input type="password" name="password" id="password" placeholder="Enter Password" required></td>
+                    <td><input type="password" name="password" id="password" placeholder="Enter password" required></td>
                 </tr>
 
                 <tr class="address">
                     <td>Address:</td>
-                    <td><input type="text" name="address" id="address" placeholder="Enter Address" required></td>
+                    <td><input type="text" name="address" id="address" placeholder="Enter address" required></td>
                 </tr>
                 <tr class="pin">
                     <td>Pin code:</td>
-                    <td><input type="text" name="pinCode" id="pinCode" placeholder="Enter Pincode" required></td>
+                    <td><input type="text" name="pinCode" id="pinCode" placeholder="Enter pinCode" required></td>
                 </tr>
             </table>
         </div>
 
             <div id="submit">
                 <input type="submit" name="action" value="Signup">
+            </div>
+
+            <div id="login">
+                Already have an account? &nbsp;<a href="/navigation_project/Login.jsp"> Log in</a>
             </div>
         </form>
     </section>

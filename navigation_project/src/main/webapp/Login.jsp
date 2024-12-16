@@ -6,20 +6,24 @@
 <meta charset="UTF-8">
    <title>Login</title>
 
-    <style>
+   <style>
+        html{
+            /* border: 2px solid black; */
+        }
         body{
-            height: 900px;
+            /* border: 2px solid black; */
+            /* height: 900px; */
             margin: 0;
             background-color: #00658d;
         }
         #login-section{
+            /* border: 2px solid black; */
             display: flex;
-            border: 2px solid grey;
             justify-content: center;
             align-items: center;
-            height: 450px;
+            height: 510px;
             width: 500px;
-            margin: 11% 37%;
+            margin: 9% 37%;
             background-color: #e6f1f5;
             border-radius: 50px;
             box-shadow: 5px 10px 30px rgb(230,241,245,0.5), -5px -10px 30px rgb(230,241,245,0.5);
@@ -51,22 +55,44 @@
             font-size: large;
             border-radius: 5px;
         }
-        #submit{
-            margin-top: 30px;
+
+        #forgetPassword{
+            float: right;
+            margin-right: 20px;
+        }
+
+        #forgetPassword a{
+            text-decoration: none;
+        }
+
+        #login{
+            margin-top: 40px;
             border-radius: 10px;
             justify-content: center;
             display: flex;
+
         }
 
-        #submit input[type="submit"]{
+        #login input[type="submit"]{
             font-size: 20px;
             border-radius: 5px;
             padding: 5px 15px;
             background-color: #0077ff;
         }
 
-        #submit input[type="submit"]:hover{
+        #login input[type="submit"]:hover{
             background-color: #005bb5;
+        }
+
+        #signup{
+            justify-content: center;
+            display: flex;
+            margin-top: 30px;
+            border-radius: 10px;
+            
+        }
+        #signup a{
+            text-decoration: none;
         }
         
 
@@ -75,7 +101,7 @@
 </head>
 <body>
     <section id="login-section">
-        <form action="Login" method="post">
+        <form action="login">
             <div class="icon">👤</div>
             <h2>Login</h2>
             <div id="email">
@@ -87,9 +113,17 @@
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" placeholder="Enter Password">
             </div>
+
+            <div id="forgetPassword">
+                <a href="#">Forget Password?</a>
+            </div>
     
-            <div id="submit">
+            <div id="login">
                 <input type="submit" name="action" value="Login">
+            </div>
+
+            <div id="signup">
+                Not a Member?&nbsp;<a href="/navigation_project/Signup.jsp"> Signup</a>
             </div>
         </form>
     </section>
