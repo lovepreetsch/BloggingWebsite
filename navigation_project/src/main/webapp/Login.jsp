@@ -101,7 +101,7 @@
 </head>
 <body>
     <section id="login-section">
-        <form action="login">
+        <form action="Login" method="post">
             <div class="icon">👤</div>
             <h2>Login</h2>
             <div id="email">
