@@ -7,70 +7,131 @@
    <title>Sign up</title>
 
     <style>
-        body{
+        body {
             background-color: #04274d;
             margin: 0;
+            font-family: Arial, sans-serif;
         }
 
-        #signup-section{
+        #signup-section {
             color: white;
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             align-items: center;
-            height: 900px;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
         }
-        #signup-section form{
+
+        #signup-section form {
             background-color: #e45c94;
             border-radius: 20px;
-            box-shadow: 5px 10px 30px rgb(228,92,148, 0.5), -5px -10px 30px rgba(228,92,148, 0.5);
-            width: 500px;
-            height: 600px;
-            padding: 0px 150px;
+            box-shadow: 5px 10px 30px rgba(228, 92, 148, 0.5), -5px -10px 30px rgba(228, 92, 148, 0.5);
+            width: 90%;
+            max-width: 500px;
+            padding: 20px 30px;
+            box-sizing: border-box;
         }
-        #signup-section form h2{
-            font-size: 50px;
-            /* padding: 0px 90px; */
-            margin: 20px 160px;
+
+        #signup-section form h2 {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 20px;
             font-weight: bold;
         }
-        #table{
-            margin: 0 10px;
 
-        }
-        #signup-section form table tr td{
-            font-size: 23px;
+        #signup-section form table {
             width: 100%;
-            padding: 5px;
         }
 
-        #signup-section form table tr td input{
-            font-size: 23px;
-            border-radius: 7px;
-            padding: 5px
+        #signup-section form table tr td {
+            font-size: 18px;
+            padding: 8px 0;
         }
+
+        #signup-section form table tr td input {
+            font-size: 16px;
+            border-radius: 7px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            border: none;
+        }
+
+        #submit {
+            text-align: center;
+            margin-top: 20px;
+        }
+
         #submit input[type="submit"] {
             padding: 10px 40px;
-            margin: 20px 200px;
-            font-size: 20px;
+            font-size: 18px;
             background-color: #04274d;
             color: #fff;
             border: none;
             border-radius: 10px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
-        #submit input[type="submit"]:hover {
-                background-color: #052e58;
-      }
-      #login{
-        
-        justify-content: center;
-        display: flex;
-      }
-      #login a{
-        text-decoration: none;
-      }
-    </style>
 
+        #submit input[type="submit"]:hover {
+            background-color: #052e58;
+        }
+
+        #login {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        #login a {
+            text-decoration: none;
+            color: #04274d;
+            font-weight: bold;
+        }
+
+        #login a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            #signup-section form {
+                padding: 20px;
+            }
+
+            #signup-section form h2 {
+                font-size: 28px;
+            }
+
+            #signup-section form table tr td {
+                font-size: 16px;
+            }
+
+            #submit input[type="submit"] {
+                font-size: 16px;
+                padding: 8px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #signup-section form {
+                padding: 15px;
+            }
+
+            #signup-section form h2 {
+                font-size: 24px;
+            }
+
+            #signup-section form table tr td {
+                font-size: 14px;
+            }
+
+            #submit input[type="submit"] {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <section id="signup-section">

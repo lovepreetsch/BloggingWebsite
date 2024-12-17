@@ -1,101 +1,146 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-   <title>Login</title>
+    <meta charset="UTF-8">
+    <title>Login</title>
 
-   <style>
-        html{
+    <style>
+        html {
             /* border: 2px solid black; */
         }
-        body{
-            /* border: 2px solid black; */
-            /* height: 900px; */
+
+        body {
             margin: 0;
             background-color: #00658d;
         }
-        #login-section{
-            /* border: 2px solid black; */
+
+        #login-section {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 510px;
-            width: 500px;
-            margin: 9% 37%;
+            width: 90%;
+            max-width: 500px;
+            margin: 10% auto;
             background-color: #e6f1f5;
             border-radius: 50px;
             box-shadow: 5px 10px 30px rgb(230,241,245,0.5), -5px -10px 30px rgb(230,241,245,0.5);
+            padding: 20px;
+            box-sizing: border-box;
         }
-        .icon{
+
+        .icon {
             font-size: 50px;
             margin-bottom: 20px;
-            /* margin-left: 134px; */
             justify-content: center;
             display: flex;
         }
-        #login-section h2{
-            font-size: 50px;
-            margin-top: 1px;
-            margin-left: 140px;
-        }
-        #email{
-            margin: 11px;
-            margin-left: 40px;
-            font-size: large;
-            border-radius: 5px;
-        }
-        #email input{
-            margin-left: 66px;
-        }
-        #password{
-            margin: 11px;
-            margin-left: 40px;
-            font-size: large;
-            border-radius: 5px;
+
+        #login-section h2 {
+            font-size: 30px;
+            margin-top: 10px;
+            text-align: center;
         }
 
-        #forgetPassword{
-            float: right;
-            margin-right: 20px;
+        #email, #password {
+            margin: 15px 0;
+            font-size: large;
         }
 
-        #forgetPassword a{
+        #email input, #password input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: large;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        #forgetPassword {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        #forgetPassword a {
             text-decoration: none;
+            color: #0077ff;
         }
 
-        #login{
-            margin-top: 40px;
-            border-radius: 10px;
+        #login {
+            margin-top: 20px;
             justify-content: center;
             display: flex;
-
         }
 
-        #login input[type="submit"]{
-            font-size: 20px;
-            border-radius: 5px;
-            padding: 5px 15px;
+        #login input[type="submit"] {
+            font-size: 18px;
+            padding: 10px 20px;
             background-color: #0077ff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        #login input[type="submit"]:hover{
+        #login input[type="submit"]:hover {
             background-color: #005bb5;
         }
 
-        #signup{
+        #signup {
             justify-content: center;
             display: flex;
-            margin-top: 30px;
-            border-radius: 10px;
-            
+            margin-top: 20px;
+            text-align: center;
         }
-        #signup a{
-            text-decoration: none;
-        }
-        
 
+        #signup a {
+            text-decoration: none;
+            color: #0077ff;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            #login-section {
+                width: 80%;
+                padding: 20px;
+            }
+
+            #login-section h2 {
+                font-size: 26px;
+            }
+
+            #email input, #password input {
+                padding: 8px;
+                font-size: medium;
+            }
+
+            #login input[type="submit"] {
+                font-size: 16px;
+                padding: 8px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #login-section {
+                width: 90%;
+                padding: 15px;
+            }
+
+            #login-section h2 {
+                font-size: 22px;
+            }
+
+            #email input, #password input {
+                font-size: small;
+                padding: 6px;
+            }
+
+            #login input[type="submit"] {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+        }
     </style>
 
 </head>
@@ -108,16 +153,16 @@
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" placeholder="Enter Email">
             </div>
-    
+
             <div id="password">
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" placeholder="Enter Password">
             </div>
 
             <div id="forgetPassword">
-                <a href="#">Forget Password?</a>
+                <a href="/navigation_project/ForgetPassword.jsp">Forget Password?</a>
             </div>
-    
+
             <div id="login">
                 <input type="submit" name="action" value="Login">
             </div>

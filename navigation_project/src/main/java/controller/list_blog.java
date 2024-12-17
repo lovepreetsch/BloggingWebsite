@@ -85,7 +85,6 @@
 //
 //}
 
-
 package controller;
 
 import java.io.IOException;
@@ -105,59 +104,66 @@ import beans.blogBeans;
 import dao.listBlogDao;
 
 @WebServlet("/List_blog")
-public class list_blog extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+public class list_blog extends HttpServlet
+{
+	private static final long serialVersionUID = 1L;
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(false); // false ensures no new session is created
-        if (session == null || session.getAttribute("userId") == null) {
-            // Redirect to login if session or user ID is not available
-            response.sendRedirect("Login.jsp");
-            return;
-        }
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		HttpSession session = request.getSession(false); // false ensures no new session is created
+		if (session == null || session.getAttribute("userId") == null)
+		{
+			// Redirect to login if session or user ID is not available
+			response.sendRedirect("Login.jsp");
+			return;
+		}
 
-        int userId = (int) session.getAttribute("userId");
-        System.out.println("Fetching blogs for user ID: " + userId);
+		int userId = (int) session.getAttribute("userId");
+		System.out.println("Fetching blogs for user ID: " + userId);
 
-        listBlogDao blogDao = new listBlogDao();
-        blogBeans blog = new blogBeans();
-        blog.setUserId(userId);
+		listBlogDao blogDao = new listBlogDao();
+		blogBeans blog = new blogBeans();
+		blog.setUserId(userId);
 
-        ResponseWrapper<?> blogDetails = blogDao.listBlog(blog);
-        
-        System.out.println("blogDetails" + blogDetails);
+		ResponseWrapper<?> blogDetails = blogDao.listBlog(blog);
 
-        if (blogDetails.getSuccess() >= 1) {
-            @SuppressWarnings("unchecked")
-            List<HashMap<String, Object>> blogList = (List<HashMap<String, Object>>) blogDetails.getData();
-            
-            System.out.println("BlogList" + blogList);
+		System.out.println("blogDetails" + blogDetails);
 
-            if (blogList != null && !blogList.isEmpty()) {
-            	System.out.println("Details found in blog list");
-                request.setAttribute("blogList", blogList); // Use request scope for forwarding
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/list_blog.jsp");
-                dispatcher.forward(request, response);
-            } else {
-                // No blogs found, set an attribute to notify user
-            	System.out.println("No blogs found for this user.");
-                request.setAttribute("message", "No blogs found for this user.");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/list_blog.jsp");
-                dispatcher.forward(request, response);
-            }
-        } else {
-            // Handle failure case
-        	System.out.println("Unable to fetch blogs. Please try again later.");
-            request.setAttribute("errorMessage", "Unable to fetch blogs. Please try again later.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/create_blog.jsp");
-            dispatcher.forward(request, response);
-        }
-    }
+		if (blogDetails.getSuccess() >= 1)
+		{
+			@SuppressWarnings("unchecked")
+			List<HashMap<String, Object>> blogList = (List<HashMap<String, Object>>) blogDetails.getData();
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response); // Reuse logic for GET and POST
-    }
+			System.out.println("BlogList" + blogList);
+
+			if (blogList != null && !blogList.isEmpty())
+			{
+				System.out.println("Details found in blog list");
+				request.setAttribute("blogList", blogList); // Use request scope for forwarding
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/list_blog.jsp");
+				dispatcher.forward(request, response);
+			} else
+			{
+				// No blogs found, set an attribute to notify user
+				System.out.println("No blogs found for this user.");
+				request.setAttribute("message", "No blogs found for this user.");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/list_blog.jsp");
+				dispatcher.forward(request, response);
+			}
+		} else
+		{
+			// Handle failure case
+			System.out.println("Unable to fetch blogs. Please try again later.");
+			request.setAttribute("errorMessage", "Unable to fetch blogs. Please try again later.");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/create_blog.jsp");
+			dispatcher.forward(request, response);
+		}
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		doGet(request, response); // Reuse logic for GET and POST
+	}
 }
- 
