@@ -116,7 +116,7 @@
 
             <!-- Submit Button -->
             <div id="content-submit">
-                <input type="submit" value="Continue">
+                <input type="submit" name="action" value="Continue">
             </div>
         </form>
     </section>

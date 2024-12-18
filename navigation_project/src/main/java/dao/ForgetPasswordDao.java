@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import beans.ForgetPasswordBeans;
+import util.Encryption;
 
 public class ForgetPasswordDao
 {
@@ -15,17 +16,27 @@ public class ForgetPasswordDao
 
 		StringBuilder updateQuery = new StringBuilder();
 		updateQuery.append("Update ").append("signup ").append("SET ").append("password = ? ").append("where ")
-				.append("id = ?  ");
+				.append("email = ?");
+
+//		System.out.println("UpdataeQuery" + updateQuery);
 
 		try
 		{
 			connection = ConnectionManager.getConnection();
 			stmt = connection.prepareStatement(updateQuery.toString());
 
+			String pass = beans.getPassword();
+			final String secretKey = "secretnote";
+			String encryptedPass = Encryption.encrypt(pass, secretKey);
+
 			int index = 1;
 
-			stmt.setString(index++, beans.getPassword());
-			stmt.setString(index++, beans.getUserId());
+			stmt.setString(index++, encryptedPass);
+//			stmt.setString(index++, beans.getUserId());
+			stmt.setString(index++, beans.getEmail());
+
+			System.out.println("password: " + beans.getPassword());
+			System.out.println("email: " + beans.getEmail());
 
 			return stmt.executeUpdate();
 

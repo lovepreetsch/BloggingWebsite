@@ -42,12 +42,13 @@ public class ForgetPassword extends HttpServlet
 			if (isUpdated != 0)
 			{
 				// Password updated successfully, redirect to login page
-				response.sendRedirect("/navigation-project/Login.jsp");
+				response.sendRedirect("/navigation_project/Login.jsp");
 			} else
 			{
 				// Email not found, forward back to the forgot password page with an error
 				// message
 				request.setAttribute("errorMessage", "Your entered email is incorrect.");
+				System.out.println("Your entered email is incorrect.");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/ForgetPassword.jsp");
 				dispatcher.forward(request, response);
 			}
@@ -55,6 +56,7 @@ public class ForgetPassword extends HttpServlet
 		{
 			e.printStackTrace();
 			request.setAttribute("errorMessage", "An unexpected error occurred. Please try again later.");
+			System.out.println("An unexpected error occurred. Please try again later.");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ForgetPassword.jsp");
 			dispatcher.forward(request, response);
 		}

@@ -194,8 +194,12 @@
 			        } 
    			 %>  </a> <br>
 
-    <p>copyright &copy; | All rights reserved</p>
 </form>
+
+<footer id="footer">
+
+    <p>copyright &copy; | All rights reserved</p>
+</footer>
 
     </section>
     
