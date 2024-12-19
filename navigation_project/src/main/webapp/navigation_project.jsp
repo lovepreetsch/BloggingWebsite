@@ -23,10 +23,14 @@
             <li><a href="#contact-section">Contact</a></li>
              <li><a href="/navigation_project/List_blog" target="_self">blog</a></li>
         </ul>
+        <form action="Logout" method="post">
+    <button type="submit" class="logout-button">Logout</button>
+</form>
+        <!-- <a href="/navigation_project/Logout" class="logout-button">Logout</a> -->
     </nav>
     </section>
 
-    <div  id="home-anime">>
+    <div  id="home-anime">
        <span><img src="img/rocket.png" alt=""></span> 
     </div>
 
@@ -57,8 +61,7 @@
             <h2>Web <span>Development</span> Services</h2>
             <h3>Hire me for your web development needs</h3>
 
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse harum sed corrupti? Nesciunt natus numquam ratione eveniet quos perspiciatis sapiente veniam libero! Totam error impedit, hic a consectetur officia ipsum quae porro harum nihil, dolorum rerum? Perferendis accusamus ratione cupiditate recusandae dolore corporis quasi delectus dicta atque nulla facilis beatae, nisi quos enim ipsa similique, autem dolor vel illo placeat.
-            </p>
+            <p>The customer himself, the customer will be able to pursue the adipiscing of the company. Are these but corrupt? They do not know that the born will never happen with reason. The whole error hinders, here from the very duties that follow these nothing, sorrowful things? We accuse him of suffering, on the grounds of desire to refuse the pain of the body, as if it were said to be chosen, and there are no easy happy ones, except those who themselves and the like, but the pain pleases even that.</p>
             
         </div>
 
@@ -67,7 +70,7 @@
     <section id="portfolio-section">
         <div id="portfolio-heading">
             <h1>My <span>Portfolio</span></h1>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam sunt consequuntur et sequi eaque aliquid provident commodi, alias natus consequatur rerum totam nulla rem quo expedita a molestias corrupti adipisci!</p>
+            <p>The customer himself, the customer will be able to pursue the adipiscing of the company. With the caresses of pleasure and pain! For by hatred, the life of the body is held fast from freedom. The offices of the corrupt hate the practice of choosing these very things, and they abandon the pains of praising the manners. Who is older than him, and we do not lead the laborious one to bear with him whence the truth is to be repudiated? Pain is the whole way, the result is bound to choose the times.</p>
         </div>
 
         <div id="portfolio-content">
@@ -77,7 +80,7 @@
                 </div>
                 <div class="portfolio-details">
                     <h4>Web Development</h4>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum voluptatum blanditiis doloremque! Enim odio, corporis vitae tenetur ex libero expedita. Officia corrupti odit exercitationem harum ipsam eligendi doloremque deserunt laudantium modi. Illo quis maiores neque ducimus laboriosam ipsam pariatur quo unde veritatis repudiandae? Dolor totam modi, consequuntur tenetur eligendi temporibus.</p>
+                    <p>The customer himself, the customer will be able to pursue the adipiscing of the company. With the caresses of pleasure and pain! For by hatred, the life of the body is held fast from freedom. The offices of the corrupt hate the practice of choosing these very things, and they abandon the pains of praising the manners. Who is older than him, and we do not lead the laborious one to bear with him whence the truth is to be repudiated? Pain is the whole way, the result is bound to choose the times.</p>
                     <a id="btn" href="#contact-section">Contact</a>
                 </div>
             </div>
@@ -90,7 +93,7 @@
                 </div>
                 <div class="portfolio-details">
                     <h4>Web Development</h4>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum voluptatum blanditiis doloremque! Enim odio, corporis vitae tenetur ex libero expedita. Officia corrupti odit exercitationem harum ipsam eligendi doloremque deserunt laudantium modi. Illo quis maiores neque ducimus laboriosam ipsam pariatur quo unde veritatis repudiandae? Dolor totam modi, consequuntur tenetur eligendi temporibus.</p>
+                    <p>The customer himself, the customer will be able to pursue the adipiscing of the company. With the caresses of pleasure and pain! For by hatred, the life of the body is held fast from freedom. The offices of the corrupt hate the practice of choosing these very things, and they abandon the pains of praising the manners. Who is older than him, and we do not lead the laborious one to bear with him whence the truth is to be repudiated? Pain is the whole way, the result is bound to choose the times.</p>
                     <a id="btn" href="#contact-section">Contact</a>
                 </div>
             </div>
@@ -103,7 +106,7 @@
                 </div>
                 <div class="portfolio-details">
                     <h4>Web Development</h4>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum voluptatum blanditiis doloremque! Enim odio, corporis vitae tenetur ex libero expedita. Officia corrupti odit exercitationem harum ipsam eligendi doloremque deserunt laudantium modi. Illo quis maiores neque ducimus laboriosam ipsam pariatur quo unde veritatis repudiandae? Dolor totam modi, consequuntur tenetur eligendi temporibus.</p>
+                    <p>The customer himself, the customer will be able to pursue the adipiscing of the company. With the caresses of pleasure and pain! For by hatred, the life of the body is held fast from freedom. The offices of the corrupt hate the practice of choosing these very things, and they abandon the pains of praising the manners. Who is older than him, and we do not lead the laborious one to bear with him whence the truth is to be repudiated? Pain is the whole way, the result is bound to choose the times.</p>
                     <a id="btn" href="#contact-section">Contact</a>
                 </div>
             </div>

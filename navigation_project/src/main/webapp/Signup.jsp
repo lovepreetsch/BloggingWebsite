@@ -141,32 +141,32 @@
             <table>
                 <tr class="first_name">
                     <td>First Name:</td>
-                    <td><input type="text" name="firstname" id="firstname" placeholder="Enter first name"></td>
+                    <td><input type="text" name="firstname" id="firstname" placeholder="Enter first name" required="required"></td>
                 </tr>
                 <tr class="last_name">
                     <td>Last Name:</td>
-                    <td><input type="text" name="lastname" id="lastname" placeholder="Enter last name"></td>
+                    <td><input type="text" name="lastname" id="lastname" placeholder="Enter last name" required="required"></td>
                 </tr>
                 <tr class="email">
                     <td>Email:</td>
-                    <td><input type="email" name="email" id="email" placeholder="Enter email" required></td>
+                    <td><input type="email" name="email" id="email" placeholder="Enter email" required="required"></td>
                 </tr>
                 <tr class="contact">
                     <td>Contact:</td>
-                    <td><input type="number" name="mobile" id="mobile" maxlength="10" oninput="this.value = this.value.slice(0, this.maxLength);"  placeholder="Enter number" required></td>
+                    <td><input type="number" name="mobile" id="mobile" maxlength="10" oninput="this.value = this.value.slice(0, this.maxLength);"  placeholder="Enter number" required="required" ></td>
                 </tr>
                 <tr class="password">
                     <td>Password:</td>
-                    <td><input type="password" name="password" id="password" placeholder="Enter password" required></td>
+                    <td><input type="password" name="password" id="password" placeholder="Enter password" required="required"></td>
                 </tr>
 
                 <tr class="address">
                     <td>Address:</td>
-                    <td><input type="text" name="address" id="address" placeholder="Enter address" required></td>
+                    <td><input type="text" name="address" id="address" placeholder="Enter address" required="required"></td>
                 </tr>
                 <tr class="pin">
                     <td>Pin code:</td>
-                    <td><input type="text" name="pinCode" id="pinCode" placeholder="Enter pinCode" required></td>
+                    <td><input type="text" name="pinCode" id="pinCode" placeholder="Enter pinCode" required="required"></td>
                 </tr>
             </table>
         </div>

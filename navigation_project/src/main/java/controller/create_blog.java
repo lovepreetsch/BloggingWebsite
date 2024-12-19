@@ -26,6 +26,7 @@ public class create_blog extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		int userId = (int) session.getAttribute("userId");
@@ -54,9 +55,10 @@ public class create_blog extends HttpServlet
 //				dispatcher.forward(request, response);
 			} else
 			{
+				request.setAttribute("errorMessage", "No data found");
 //				RequestDispatcher dispatcher = request.getRequestDispatcher("/failure.html");
 //                dispatcher.forward(request, response);
-				response.sendRedirect("/navigation_project/failure.html");
+//				response.sendRedirect("/navigation_project/failure.html");
 			}
 		} catch (Exception e)
 		{

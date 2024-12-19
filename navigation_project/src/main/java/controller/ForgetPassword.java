@@ -2,12 +2,12 @@ package controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.ForgetPasswordBeans;
 import dao.ForgetPasswordDao;
@@ -36,32 +36,33 @@ public class ForgetPassword extends HttpServlet
 
 		try
 		{
-			// Check if the email exists and the password is updated
+
 			int isUpdated = ForgetPasswordDao.forgetPassword(beans);
 
 			if (isUpdated != 0)
 			{
-				// Password updated successfully, redirect to login page
 				response.sendRedirect("/navigation_project/Login.jsp");
 			} else
 			{
-				// Email not found, forward back to the forgot password page with an error
-				// message
-				request.setAttribute("errorMessage", "Your entered email is incorrect.");
+
+				HttpSession session = request.getSession();
+				session.setAttribute("errorMessage", "Your entered email is incorrect.");
 				System.out.println("Your entered email is incorrect.");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/ForgetPassword.jsp");
-				dispatcher.forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/ForgetPassword.jsp");
+
 			}
-		} catch (ServletException e)
+		} catch (Exception e)
 		{
 			e.printStackTrace();
-			request.setAttribute("errorMessage", "An unexpected error occurred. Please try again later.");
+//			request.setAttribute("errorMessage", "An unexpected error occurred. Please try again later.");
+//			System.out.println("An unexpected error occurred. Please try again later.");
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("/ForgetPassword.jsp");
+//			dispatcher.forward(request, response);
+			HttpSession session = request.getSession();
+			session.setAttribute("errorMessage", "An unexpected error occurred. Please try again later.");
 			System.out.println("An unexpected error occurred. Please try again later.");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/ForgetPassword.jsp");
-			dispatcher.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/ForgetPassword.jsp");
 		}
 	}
 
 }
-
-//}

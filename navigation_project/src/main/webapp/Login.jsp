@@ -19,7 +19,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 510px;
+            height: 540px;
             width: 90%;
             max-width: 500px;
             margin: 10% auto;
@@ -41,6 +41,10 @@
             font-size: 30px;
             margin-top: 10px;
             text-align: center;
+        }
+        
+        .errorMessage{
+           color: red;        
         }
 
         #email, #password {
@@ -149,15 +153,28 @@
         <form action="Login" method="post">
             <div class="icon">👤</div>
             <h2>Login</h2>
+
             <div id="email">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="Enter Email">
+                <input type="email" name="email" id="email" placeholder="Enter Email" required="required">
             </div>
 
             <div id="password">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="Enter Password">
+                <input type="password" name="password" id="password" placeholder="Enter Password" required="required">
             </div>
+            
+                        
+           <%
+            		String errorMessage = (String) session.getAttribute("errorMessage");
+           			if(errorMessage != null){
+            %> 
+            <div class="errorMessage"><%= errorMessage %></div>
+            <%
+            session.removeAttribute("errorMessage");
+           			}
+            %>
+            
 
             <div id="forgetPassword">
                 <a href="/navigation_project/ForgetPassword.jsp">Forget Password?</a>

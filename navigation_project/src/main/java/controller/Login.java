@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +29,8 @@ public class Login extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+
+		System.out.println("Login user:");
 		// TODO Auto-generated method stub
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -41,53 +44,64 @@ public class Login extends HttpServlet
 
 		if (userDetails == null)
 		{
-			response.sendRedirect("/navigation_project/Login.jsp");
-			System.out.println("No data found");
-			return;
-		}
-
-		String firstname = (String) userDetails.get("firstname");
-		String lastname = (String) userDetails.get("lastname");
-
-		String fullname = firstname + " " + lastname;
-
-		int id = (int) userDetails.get("id");
-
-		String address = (String) userDetails.get("address");
-
-		String mobile = (String) userDetails.get("mobile");
-
-		System.out.println("LoginId11111111: " + id);
-
-		// System.out.println(emailid);
-		// System.out.println(password);
-
-//		boolean result = LoginDao.login(email, password);
-		if (id != 0)
+//			response.sendRedirect("/navigation_project/Login.jsp");
+//			System.out.println("No data found");
+//			return;
+			request.setAttribute("errorMessage", "You are not registered");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+			dispatcher.forward(request, response);
+//			response.sendRedirect("/navigation_project/Login.jsp");
+			System.out.println("You are not registered");
+		} else
 		{
 
-			System.out.println("LoginId2222222222: " + id);
+			String status = (String) userDetails.get("status");
 
-			HttpSession session = request.getSession();
-			session.setAttribute("fullname", fullname);
+			if ("email_not_found".equals(status))
+			{
+				HttpSession session = request.getSession();
+				session.setAttribute("errorMessage", "Email not found. Please register!");
+				response.sendRedirect(request.getContextPath() + "/Login.jsp");
 
-			session.setAttribute("userId", id);
+			} else if ("incorrect_password".equals(status))
+			{
+				HttpSession session = request.getSession();
+				session.setAttribute("errorMessage", "Incorrect Password. Please try again!");
+				response.sendRedirect(request.getContextPath() + "/Login.jsp");
+			} else if ("success".equals(status))
+			{
 
-			session.setAttribute("address", address);
+				String firstname = (String) userDetails.get("firstname");
+				String lastname = (String) userDetails.get("lastname");
 
-			session.setAttribute("mobile", mobile);
+				String fullname = firstname + " " + lastname;
 
-			session.setAttribute("email", email);
+				int id = (int) userDetails.get("id");
+
+				String address = (String) userDetails.get("address");
+
+				String mobile = (String) userDetails.get("mobile");
+
+				System.out.println("LoginId11111111: " + id);
+				System.out.println("LoginId2222222222: " + id);
+
+				HttpSession session = request.getSession();
+				session.setAttribute("fullname", fullname);
+
+				session.setAttribute("userId", id);
+
+				session.setAttribute("address", address);
+
+				session.setAttribute("mobile", mobile);
+
+				session.setAttribute("email", email);
 
 //		        session.setAttribute("email", email);
 
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("/navigation_project.jsp");
-			response.sendRedirect("/navigation_project/navigation_project.jsp");
-		} else
-		{
-			request.setAttribute("errorMessage", "Wrong Credentials");
-//			RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
-			response.sendRedirect("/navigation_project/Login.jsp");
+				response.sendRedirect("/navigation_project/navigation_project.jsp");
+			}
+
 		}
 	}
 }

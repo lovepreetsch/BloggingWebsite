@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,6 +63,10 @@
             border-color: #7a4cf5;
             box-shadow: 0 0 5px rgba(122, 76, 245, 0.5);
         }
+        
+         .errorMessage{
+           color: red;        
+        }
 
         /* Submit Button */
         input[type="submit"] {
@@ -113,6 +118,21 @@
                 <label for="password">New Password</label>
                 <input type="password" name="password" id="password" placeholder="Enter new password" required>
             </div>
+            
+            
+           <%--   <c:if test="${not empty errorMessage}">
+            <p style="color: red;">${errorMessage}</p>
+        </c:if> --%>
+        
+         <%
+            		String errorMessage = (String) session.getAttribute("errorMessage");
+           			if(errorMessage != null){
+            %> 
+            <div class="errorMessage"><%= errorMessage %></div>
+            <%
+            session.removeAttribute("errorMessage");
+           			}
+            %>
 
             <!-- Submit Button -->
             <div id="content-submit">

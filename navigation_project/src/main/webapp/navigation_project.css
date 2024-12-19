@@ -27,6 +27,7 @@ nav {
 nav ul {
     display: flex;
     list-style: none;
+    padding-right: 900px;
 }
 
 nav ul li a {
@@ -37,6 +38,20 @@ nav ul li a {
     color: #efd7d6;
     letter-spacing: 2px;
 }
+
+.logout-button {
+    background-color: #ff0077; /* Vibrant button color */
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .logout-button:hover {
+    background-color: #cc0055; /* Slightly darker on hover */
+  }
 
 nav ul li a:hover {
     box-shadow: 5px 10px 30px #d03173;
