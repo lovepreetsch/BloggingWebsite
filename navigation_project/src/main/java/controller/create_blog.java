@@ -31,12 +31,28 @@ public class create_blog extends HttpServlet
 		HttpSession session = request.getSession();
 		int userId = (int) session.getAttribute("userId");
 
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
+		String title = request.getParameter("title").trim();
+		String content = request.getParameter("content").trim();
 
 		System.out.println("CreateUserId: " + userId);
 		System.out.println("Title: " + title);
 		System.out.println("Content: " + content);
+
+		if (title == null || title.trim().isEmpty())
+		{
+//			HttpSession session = request.getSession();
+			session.setAttribute("errorMessage", "Title cannot be empty.");
+			request.getRequestDispatcher("/create_blog.jsp").forward(request, response);
+			return;
+		}
+
+		if (content == null || content.trim().isEmpty())
+		{
+//			HttpSession session = request.getSession();
+			session.setAttribute("errorMessage", "Content cannot be empty.");
+			request.getRequestDispatcher("/create_blog.jsp").forward(request, response);
+			return;
+		}
 
 		blogBeans blog = new blogBeans();
 		blog.setUserId(userId);
@@ -55,10 +71,12 @@ public class create_blog extends HttpServlet
 //				dispatcher.forward(request, response);
 			} else
 			{
-				request.setAttribute("errorMessage", "No data found");
+				session = request.getSession();
+				session.setAttribute("errorMessage", "No data found");
+//				request.setAttribute("errorMessage", "No data found");
 //				RequestDispatcher dispatcher = request.getRequestDispatcher("/failure.html");
 //                dispatcher.forward(request, response);
-//				response.sendRedirect("/navigation_project/failure.html");
+				response.sendRedirect("/navigation_project/failure.html");
 			}
 		} catch (Exception e)
 		{

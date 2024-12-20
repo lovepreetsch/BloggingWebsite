@@ -28,6 +28,12 @@
             text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
             margin-left: 150px;
         }
+        
+        .errorMessage{
+       	 	color: red;
+            text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+            margin-left: 150px;
+        }
 
         #blog-title {
             margin: 20px 0;
@@ -159,14 +165,23 @@
 
 <body>
     <section id="create-blog">
-        <form action="Create_blog" method="post">
-        
-<!--         <p id="error"></p> -->
+        <form action="Create_blog" method="post" onsubmit="return validateForm(event);">
         
             <div id="blog-title">
                 <input type="text" name="title" id="title" placeholder="Type Title">
             </div>
                     <p id="error"></p>
+                    
+                    
+            <%
+            		String errorMessage = (String) session.getAttribute("errorMessage");
+           			if(errorMessage != null){
+            %> 
+            <div class="errorMessage"><%= errorMessage %></div>
+            <%
+            session.removeAttribute("errorMessage");
+           			}
+            %>
 
             <div class="btn-toolbar">
                 <button type="button" onclick="formatDoc('bold')" title="Bold"><i class='bx bx-bold'></i></button>
@@ -184,71 +199,48 @@
             </div>
 
             <div id="blog-content">
-               <!--  <div id="content" contenteditable="true" placeholder="Type your content..."></div> -->
-                 <textarea name="content" id="content" placeholder="Type your content..."></textarea>
+               <div id="content" contenteditable="true" placeholder="Type your content..."></div>
+                 <!-- <textarea name="content" id="content" placeholder="Type your content..."></textarea> -->
+                 <textarea name="content" id="hiddenContent" style="display: none;"></textarea>
+                 
             </div>
 
             <div id="blog-submit">
-                <input type="submit" value="Send" onclick="check(event)">
+                <input type="submit" value="Send" name="action">
             </div>
         </form>
     </section>
 
     <script>
-      /*   const content = document.getElementById('content');
-        const showCode = document.getElementById('show-code');
-        let codeViewActive = false; */
-
-        function formatDoc(cmd) {
-  			const textarea = document.getElementById("content");
-  			textarea.focus();
+      
+       function formatDoc(cmd) {
             document.execCommand(cmd);
         }
+       
+        function validateForm(event) {
+/*     	    const title = document.getElementById("title").value.trim(); */
+    	    const contentDiv = document.getElementById("content");
+    	    const content = contentDiv.innerText.trim();
+/*     	    const errorMessage = document.getElementById("error"); */
+
+    	    /* errorMessage.textContent = ""; */ // Clear previous error
+
+/*     	    if (!title) {
+    	        errorMessage.textContent = "Title cannot be empty.";
+    	        return false;
+    	    }
+
+    	    if (!content || content === "<br>") {
+    	        errorMessage.textContent = "Content cannot be empty.";
+    	        return false;
+    	    } */
+
+    	    // Copy contenteditable data to hidden textarea for form submission
+    	    document.getElementById("hiddenContent").value = content;
+
+    	    return true; // Allow form submission
+    	} 
         
-        
-        function check(event) {
-
-        	event.preventDefault();
-
-            const title = document.getElementById("title").value.trim();
-            const content = document.getElementById("content").value.trim();
-            const errorMessage = document.getElementById("error");
-            /* const errorToThrow = ""; */
-
-            if(!title){
-				errorMessage.textContent = "Title cannot be empty.";
-                 /* alert("Title cannot be empty."); */
-                return false;
-            }
-            if(!content){
-            	errorMessage.textContent = "Content cannot be empty.";
-                /* alert("Content cannot be empty."); */
-                return false;
-            }
-            
-            alert("Successfull");
-            event.target.closest('form').submit();
-    }
-        
-/* 
-        function addLink() {
-            const url = prompt('Insert URL');
-            if (url) formatDoc('createLink', url);
-        }
-
-        showCode.addEventListener('click', () => {
-            codeViewActive = !codeViewActive;
-            if (codeViewActive) {
-                content.textContent = content.innerHTML;
-            } else {
-                content.innerHTML = content.textContent;
-            }
-        });
-
-        function submitContent() {
-            const blogContent = content.innerHTML;
-            /* alert("Blog content submitted:\n" + blogContent); 
-        } */
     </script>
 </body>
 
