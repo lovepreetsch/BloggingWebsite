@@ -137,7 +137,9 @@
             <!-- Submit Button -->
             <div id="content-submit">
                 <input type="submit" name="action" value="Continue">
-            </div>
+            </div> <br>
+
+            Go back to <a href="Login.jsp">Login</a>
         </form>
     </section>
 </body>
