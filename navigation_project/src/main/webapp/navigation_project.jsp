@@ -48,7 +48,7 @@
    			 %>       
         		</span></h2>
         <p> I’ve been studying computer science for two years. In order to kick-start my career before I graduate, I am looking for a job of a web developer, since that’s what I’ve been doing already for four years in my free time. Designing websites for friends, developing simple e-shops with the help of some open source content-management systems, and so on. Besides that I am a normal guy who enjoys hiking and spending time with friends, while not working or studying, which takes most of my time of course. If I should pick the best website I’ve designed up to this point, it will be this one: GOOGLE. I am ambitious and hard-working and believe you’ll give me a chance to prove my words.</p>
-        <a id="btn" href="ContactUs.html">Contact</a>
+        <a id="btn" href="#contact-section">Contact</a>
     </div>
     <div id="home-img">
         <img src="img/person1.png" alt="">

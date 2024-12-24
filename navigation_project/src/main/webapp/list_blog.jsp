@@ -26,7 +26,7 @@ nav {
 	box-shadow: 5px 10px 30px rgba(0, 0, 0, 0.5);
 	position: sticky;
 	width: 100%;
-	background-color: #0a3766;
+	background-color: #04274d;
 	left: 0px;
 	top: 0px;
 }
