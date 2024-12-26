@@ -112,7 +112,7 @@ public class list_blog extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		HttpSession session = request.getSession(false); // false ensures no new session is created
-		if (session == null || session.getAttribute("userId") == null)
+		if(session == null || session.getAttribute("userId") == null)
 		{
 			// Redirect to login if session or user ID is not available
 			response.sendRedirect("Login.jsp");
@@ -130,20 +130,21 @@ public class list_blog extends HttpServlet
 
 		System.out.println("blogDetails" + blogDetails);
 
-		if (blogDetails.getSuccess() >= 1)
+		if(blogDetails.getSuccess() >= 1)
 		{
 			@SuppressWarnings("unchecked")
 			List<HashMap<String, Object>> blogList = (List<HashMap<String, Object>>) blogDetails.getData();
 
 			System.out.println("BlogList" + blogList);
 
-			if (blogList != null && !blogList.isEmpty())
+			if(blogList != null && !blogList.isEmpty())
 			{
 				System.out.println("Details found in blog list");
 				request.setAttribute("blogList", blogList); // Use request scope for forwarding
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/list_blog.jsp");
 				dispatcher.forward(request, response);
-			} else
+			}
+			else
 			{
 				// No blogs found, set an attribute to notify user
 				System.out.println("No blogs found for this user.");
@@ -151,7 +152,8 @@ public class list_blog extends HttpServlet
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/list_blog.jsp");
 				dispatcher.forward(request, response);
 			}
-		} else
+		}
+		else
 		{
 			// Handle failure case
 			System.out.println("Unable to fetch blogs. Please try again later.");
@@ -161,9 +163,9 @@ public class list_blog extends HttpServlet
 		}
 	}
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		doGet(request, response); // Reuse logic for GET and POST
-	}
+	//	@Override
+	//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	//	{
+	//		doGet(request, response); // Reuse logic for GET and POST
+	//	}
 }

@@ -30,13 +30,14 @@ public class listBlogDao
 			System.out.println("listBlog: " + stmt);
 			resultSet = stmt.executeQuery();
 
-			if (!resultSet.isBeforeFirst())
+			if(!resultSet.isBeforeFirst())
 			{
 				// The ResultSet is empty
 				return new ResponseWrapper<String>(0, 404, "No details found");
-			} else
+			}
+			else
 			{
-				while (resultSet.next())
+				while(resultSet.next())
 				{
 
 					HashMap<String, Object> tempObj = new HashMap<>();
@@ -44,6 +45,7 @@ public class listBlogDao
 					tempObj.put("title", resultSet.getObject("title"));
 					tempObj.put("content", resultSet.getObject("content"));
 					tempObj.put("userId", resultSet.getObject("user_id"));
+					tempObj.put("image", resultSet.getObject("image"));
 
 					String utcTimestamp = resultSet.getString("created_on");
 					String userTimeZone = "Asia/Kolkata"; // Replace with dynamic timezone
@@ -59,7 +61,8 @@ public class listBlogDao
 				return new ResponseWrapper<>(1, list, 200, "Role details");
 			}
 
-		} catch (SQLException ex)
+		}
+		catch(SQLException ex)
 		{
 			ConnectionManager.getConn();
 			ex.printStackTrace();
@@ -68,15 +71,16 @@ public class listBlogDao
 		{
 			try
 			{
-				if (resultSet != null)
+				if(resultSet != null)
 				{
 					resultSet.close();
 				}
-				if (stmt != null)
+				if(stmt != null)
 				{
 					stmt.close();
 				}
-			} catch (SQLException e)
+			}
+			catch(SQLException e)
 			{
 				e.printStackTrace();
 			}

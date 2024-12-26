@@ -156,12 +156,16 @@
 
             <div id="email">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="Enter Email" required="required">
+                <input type="email" name="email" id="email" placeholder="Enter Email"> <!-- required="required" -->
             </div>
 
             <div id="password">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="Enter Password" required="required">
+                <input type="password" name="password" id="password" placeholder="Enter Password"> <!-- required="required" -->
+                <% 
+                String password = (String) session.getAttribute("password");
+                System.out.println("Password: " + password);
+                %>
             </div>
             
                         

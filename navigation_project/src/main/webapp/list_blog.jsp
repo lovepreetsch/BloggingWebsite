@@ -72,6 +72,10 @@ nav {
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.blog-post:hover{
+transform: scale(1.02);
+}
+
 .blog-post h2 {
 	margin: 0;
 	font-size: 24px;
@@ -131,6 +135,53 @@ nav {
 	transform: scale(1.1);
 }
 
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed position */
+    z-index: 1000; /* On top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Black background with transparency */
+    overflow: auto; /* Enable scrolling if needed */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal content (image) */
+.modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
+    margin-top: 50px;
+    display: block;
+}
+
+/* Close button (X) */
+.close {
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #f44336;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Style for the image thumbnail (small version) */
+img {
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
   @media (max-width: 800px) {
             nav {
                 flex-direction: column;
@@ -177,14 +228,55 @@ nav {
 		<h1>My Blogs</h1>
 		<c:forEach var="blog" items="${blogList}">
 			<div class="blog-post">
+			
+			<c:choose>
+			
+			<c:when test="${empty blog.title}">
+				<p style="color: red; font-weight: bold;">Error: Blog title is missing.</p>
+			</c:when>
+			
+			<c:when test="${empty blog.content}">
+				<p style="color: red; font-weight: bold;">Error: Blog content is missing.</p>
+			</c:when>
+			
+			<c:otherwise>
 
 				<div id="time">
 					<p>${blog.createdOn }</p>
 				</div>
 				<h2>${blog.title}</h2>
 				<p>${blog.content}</p>
+				<div id="image">
+					<%-- <p>http://localhost:8080${pageContext.request.contextPath}/${blog.image }</p> --%>
+					 <%-- <c:if test="${not empty blog.image}"
+                    <img src="http://localhost:8080${pageContext.request.contextPath}/${blog.image}" alt="Blog Image" style="width: 10%; height: auto;">
+                </c:if> --%>
+                <c:choose>
+                	<c:when test="${not empty blog.image && blog.image.endsWith('.jpg') || blog.image.endsWith('jpeg') || blog.image.endsWith('png') }">
+                		<a href="javascript:void(0);" onclick="openModal('http://localhost:8080${pageContext.request.contextPath}/${blog.image}')"><img src="http://localhost:8080${pageContext.request.contextPath}/${blog.image}" alt="Blog Image" style="width: 10%; height: auto;"></a>
+                	</c:when>
+                	
+                	<c:when test="${not empty blog.image && blog.image.endsWith('.pdf')}">
+                		<%-- <iframe src="http://localhost:8080${pageContext.request.contextPath}/${blog.image}" alt="Blog Image" style="width: 10%; height: auto;"> --%>
+                			 <a href="${pageContext.request.contextPath}/${blog.image}" target="_blank">Click here to view the PDF.</a>
+                		<!-- </iframe> -->
+                	</c:when>
+                	
+                	<c:otherwise>
+                            <p style="color: red;">Unsupported file type. Please upload an image or PDF.</p>
+                        </c:otherwise>
+                </c:choose>
+				</div>
+					</c:otherwise>
+			</c:choose>
 			</div>
 		</c:forEach>
+		
+		<!-- Modal for Enlarged Image -->
+<div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
 
 
 		<button id="upwardButton" onclick="scrollToTop()"
@@ -223,6 +315,23 @@ nav {
 			});
 
 		}
+		
+		
+
+        function openModal(imageSrc){
+            const modal = document.getElementById("imageModal");
+            const modalImage = document.getElementById("modalImage");
+
+            modalImage.src = imageSrc;
+
+            modal.style.display = "block";
+        }
+
+        function closeModal(){
+            const modal = document.getElementById("imageModal");
+
+            modal.style.display = "none";
+        }
 	</script>
 
 </body>

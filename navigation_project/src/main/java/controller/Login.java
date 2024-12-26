@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import beans.LoginBeans;
 //import dao.AuthenticatePerson;
 import dao.LoginDao;
+import util.UtilityClass;
 
 /**
  * Servlet implementation class Signup
@@ -35,6 +36,20 @@ public class Login extends HttpServlet
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 
+		System.out.println("Server side password: " + password);
+
+		if(UtilityClass.isNull(password))
+		{
+			System.out.println("inside password null");
+			HttpSession session = request.getSession();
+			session.setAttribute("errorMessage", "Password can not be empty!");
+			//			response.sendRedirect("/navigation_project/Login.jsp");
+			//			response.sendRedirect("/navigation_project/navigation_project.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+
 		LoginBeans login = new LoginBeans();
 		login.setEmail(email);
 		login.setPassword(password);
@@ -42,66 +57,61 @@ public class Login extends HttpServlet
 		// Get the user's name if login is successful
 		HashMap<String, Object> userDetails = LoginDao.login(login);
 
-		if (userDetails == null)
+		String status = (String) userDetails.get("status");
+
+		if("email_not_found".equals(status))
 		{
-//			response.sendRedirect("/navigation_project/Login.jsp");
-//			System.out.println("No data found");
-//			return;
-			request.setAttribute("errorMessage", "You are not registered");
+			HttpSession session = request.getSession();
+			session.setAttribute("errorMessage", "Email not found. Please register!");
+			//				response.sendRedirect(request.getContextPath() + "/Login.jsp");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
 			dispatcher.forward(request, response);
-//			response.sendRedirect("/navigation_project/Login.jsp");
-			System.out.println("You are not registered");
-		} else
+			return;
+		}
+		else if("incorrect_password".equals(status))
+
+		{
+			HttpSession session = request.getSession();
+			session.setAttribute("errorMessage", "Incorrect Password. Please try again!");
+			//				response.sendRedirect(request.getContextPath() + "/Login.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+		else if("success".equals(status))
 		{
 
-			String status = (String) userDetails.get("status");
+			String firstname = (String) userDetails.get("firstname");
+			String lastname = (String) userDetails.get("lastname");
 
-			if ("email_not_found".equals(status))
-			{
-				HttpSession session = request.getSession();
-				session.setAttribute("errorMessage", "Email not found. Please register!");
-				response.sendRedirect(request.getContextPath() + "/Login.jsp");
+			String fullname = firstname + " " + lastname;
 
-			} else if ("incorrect_password".equals(status))
-			{
-				HttpSession session = request.getSession();
-				session.setAttribute("errorMessage", "Incorrect Password. Please try again!");
-				response.sendRedirect(request.getContextPath() + "/Login.jsp");
-			} else if ("success".equals(status))
-			{
+			int id = (int) userDetails.get("id");
 
-				String firstname = (String) userDetails.get("firstname");
-				String lastname = (String) userDetails.get("lastname");
+			String address = (String) userDetails.get("address");
 
-				String fullname = firstname + " " + lastname;
+			String mobile = (String) userDetails.get("mobile");
 
-				int id = (int) userDetails.get("id");
+			System.out.println("LoginId11111111: " + id);
+			System.out.println("LoginId2222222222: " + id);
 
-				String address = (String) userDetails.get("address");
+			HttpSession session = request.getSession();
+			session.setAttribute("fullname", fullname);
 
-				String mobile = (String) userDetails.get("mobile");
+			session.setAttribute("userId", id);
 
-				System.out.println("LoginId11111111: " + id);
-				System.out.println("LoginId2222222222: " + id);
+			session.setAttribute("address", address);
 
-				HttpSession session = request.getSession();
-				session.setAttribute("fullname", fullname);
+			session.setAttribute("mobile", mobile);
 
-				session.setAttribute("userId", id);
+			session.setAttribute("email", email);
 
-				session.setAttribute("address", address);
+			//		        session.setAttribute("email", email);
 
-				session.setAttribute("mobile", mobile);
-
-				session.setAttribute("email", email);
-
-//		        session.setAttribute("email", email);
-
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("/navigation_project.jsp");
-				response.sendRedirect("/navigation_project/navigation_project.jsp");
-			}
-
+			//		RequestDispatcher dispatcher = request.getRequestDispatcher("/navigation_project.jsp");
+			response.sendRedirect("/navigation_project/navigation_project.jsp");
+			return;
 		}
+
 	}
 }
