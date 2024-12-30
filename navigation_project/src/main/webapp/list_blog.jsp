@@ -63,6 +63,49 @@ nav {
 	color: antiquewhite;
 }
 
+.errorMessage {
+	color: red;
+	text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2rem;
+	width: 50%;
+	margin: auto;
+	text-align: center;
+	line-height: 20;
+}
+
+#search-section {
+	margin-left: 8.9%;
+}
+
+#searchInput {
+	border-radius: 5px;
+	font-weight: 400;
+	line-height: 1.5;
+	padding: .375rem .75rem;
+	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+	width: 15%;
+	border: 2px solid #f0f0f0 !important;
+}
+
+#searchButton {
+	border-radius: 5px;
+	font-weight: 400;
+	line-height: 1.5;
+	padding: .375rem .75rem;
+	/* transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out; */
+	/* width: 10%; */
+	border: 2px solid #f0f0f0 !important;
+}
+
+#searchButton:hover {
+	background-color: rgba(245, 245, 245, 0.89);
+	cursor: pointer;
+	box-shadow: 2px 5px 15px rgba(245, 245, 245, 0.5);
+}
+
 .blog-post {
 	margin: 20px auto;
 	padding: 20px;
@@ -72,8 +115,8 @@ nav {
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.blog-post:hover{
-transform: scale(1.02);
+.blog-post:hover {
+	transform: scale(1.02);
 }
 
 .blog-post h2 {
@@ -136,78 +179,73 @@ transform: scale(1.02);
 }
 
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Fixed position */
-    z-index: 1000; /* On top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Black background with transparency */
-    overflow: auto; /* Enable scrolling if needed */
-    justify-content: center;
-    align-items: center;
+	display: none; /* Hidden by default */
+	position: fixed; /* Fixed position */
+	z-index: 1000; /* On top */
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	/* Black background with transparency */
+	overflow: auto; /* Enable scrolling if needed */
+	justify-content: center;
+	align-items: center;
 }
 
 /* Modal content (image) */
 .modal-content {
-    max-width: 90%;
-    max-height: 90%;
-    margin: auto;
-    margin-top: 50px;
-    display: block;
+	max-width: 90%;
+	max-height: 90%;
+	margin: auto;
+	margin-top: 50px;
+	display: block;
 }
 
 /* Close button (X) */
 .close {
-    color: white;
-    font-size: 40px;
-    font-weight: bold;
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    cursor: pointer;
+	color: white;
+	font-size: 40px;
+	font-weight: bold;
+	position: absolute;
+	top: 15px;
+	right: 35px;
+	cursor: pointer;
 }
 
-.close:hover,
-.close:focus {
-    color: #f44336;
-    text-decoration: none;
-    cursor: pointer;
+.close:hover, .close:focus {
+	color: #f44336;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 /* Style for the image thumbnail (small version) */
 img {
-    cursor: pointer;
-    transition: 0.3s ease;
+	cursor: pointer;
+	transition: 0.3s ease;
 }
 
-  @media (max-width: 800px) {
-            nav {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .logo img {
-                margin-bottom: 10px;
-            }
-
-            .back-button {
-                align-self: flex-end;
-            }
-
-            .blog-post {
-                width: 95%;
-            }
-
-            #blog-section h1 {
-                font-size: 1.5rem;
-            }
-
-            #create i {
-                font-size: 2.5rem;
-            }
-        }
+@media ( max-width : 800px) {
+	nav {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.logo img {
+		margin-bottom: 10px;
+	}
+	.back-button {
+		align-self: flex-end;
+	}
+	.blog-post {
+		width: 95%;
+	}
+	#blog-section h1 {
+		font-size: 1.5rem;
+	}
+	#create i {
+		font-size: 2.5rem;
+	}
+}
 </style>
 </head>
 <body>
@@ -216,8 +254,7 @@ img {
 		<nav>
 			<a class="logo" href=""> <img src="logo/project.co_4x.jpg"
 				alt="Project">
-			</a>
-			<a href="/navigation_project/navigation_project.jsp">
+			</a> <a href="/navigation_project/navigation_project.jsp">
 				<button type="submit" class="back-button">Home</button>
 			</a>
 
@@ -226,57 +263,91 @@ img {
 
 	<section id="blog-section">
 		<h1>My Blogs</h1>
+		<div id="search-section">
+			<!-- Search form -->
+			<form action="List_blog" method="get">
+				<input type="text" id="searchInput" name="searchKeyword"
+					placeholder="Search blogs..." />
+				<button id="searchButton" type="submit">Search</button>
+			</form>
+		</div>
+
+		<div id="autocompleteResults" class="autocomplete-results"></div>
+
+		<!-- For errorMessage in center -->
+		<%
+		String errorMessage = (String) session.getAttribute("errorMessage");
+		if (errorMessage != null) {
+		%>
+		<div class="errorMessage"><%=errorMessage%></div>
+		<%
+		session.removeAttribute("errorMessage");
+		}
+		%>
 		<c:forEach var="blog" items="${blogList}">
 			<div class="blog-post">
-			
-			<c:choose>
-			
-			<c:when test="${empty blog.title}">
-				<p style="color: red; font-weight: bold;">Error: Blog title is missing.</p>
-			</c:when>
-			
-			<c:when test="${empty blog.content}">
-				<p style="color: red; font-weight: bold;">Error: Blog content is missing.</p>
-			</c:when>
-			
-			<c:otherwise>
 
-				<div id="time">
-					<p>${blog.createdOn }</p>
-				</div>
-				<h2>${blog.title}</h2>
-				<p>${blog.content}</p>
-				<div id="image">
-					<%-- <p>http://localhost:8080${pageContext.request.contextPath}/${blog.image }</p> --%>
-					 <%-- <c:if test="${not empty blog.image}"
+				<c:choose>
+
+					<c:when test="${empty blog.title}">
+						<p style="color: red; font-weight: bold;">Error: Blog title is
+							missing.</p>
+					</c:when>
+
+					<c:when test="${empty blog.content}">
+						<p style="color: red; font-weight: bold;">Error: Blog content
+							is missing.</p>
+					</c:when>
+
+					<c:otherwise>
+
+						<div id="time">
+							<p>${blog.createdOn }</p>
+						</div>
+						<h2>${blog.title}</h2>
+						<p>${blog.content}</p>
+						<div id="image">
+							<%-- <p>http://localhost:8080${pageContext.request.contextPath}/${blog.image }</p> --%>
+							<%-- <c:if test="${not empty blog.image}"
                     <img src="http://localhost:8080${pageContext.request.contextPath}/${blog.image}" alt="Blog Image" style="width: 10%; height: auto;">
                 </c:if> --%>
-                <c:choose>
-                	<c:when test="${not empty blog.image && blog.image.endsWith('.jpg') || blog.image.endsWith('jpeg') || blog.image.endsWith('png') }">
-                		<a href="javascript:void(0);" onclick="openModal('http://localhost:8080${pageContext.request.contextPath}/${blog.image}')"><img src="http://localhost:8080${pageContext.request.contextPath}/${blog.image}" alt="Blog Image" style="width: 10%; height: auto;"></a>
-                	</c:when>
-                	
-                	<c:when test="${not empty blog.image && blog.image.endsWith('.pdf')}">
-                		<%-- <iframe src="http://localhost:8080${pageContext.request.contextPath}/${blog.image}" alt="Blog Image" style="width: 10%; height: auto;"> --%>
-                			 <a href="${pageContext.request.contextPath}/${blog.image}" target="_blank">Click here to view the PDF.</a>
-                		<!-- </iframe> -->
-                	</c:when>
-                	
-                	<c:otherwise>
-                            <p style="color: red;">Unsupported file type. Please upload an image or PDF.</p>
-                        </c:otherwise>
-                </c:choose>
-				</div>
+							<c:choose>
+								<c:when
+									test="${not empty blog.image && blog.image.endsWith('.jpg') || blog.image.endsWith('jpeg') || blog.image.endsWith('png') }">
+									<a href="javascript:void(0);"
+										onclick="openModal('http://localhost:8080${pageContext.request.contextPath}/${blog.image}')"><img
+										src="http://localhost:8080${pageContext.request.contextPath}/${blog.image}"
+										alt="Blog Image" style="width: 10%; height: auto;"></a>
+								</c:when>
+
+								<c:when
+									test="${not empty blog.image && blog.image.endsWith('.pdf')}">
+									<%-- <iframe src="http://localhost:8080${pageContext.request.contextPath}/${blog.image}" alt="Blog Image" style="width: 10%; height: auto;"> --%>
+									<a href="${pageContext.request.contextPath}/${blog.image}"
+										target="_blank">Click here to view the PDF.</a>
+									<!-- </iframe> -->
+								</c:when>
+
+								<c:otherwise>
+									<p style="color: red;">Unsupported file type. Please upload
+										an image or PDF.</p>
+								</c:otherwise>
+							</c:choose>
+						</div>
 					</c:otherwise>
-			</c:choose>
+				</c:choose>
 			</div>
 		</c:forEach>
 		
+		<div id="paggination">
+			<c:if test="${totalPages > 1 }"></c:if>
+		</div>
+
 		<!-- Modal for Enlarged Image -->
-<div id="imageModal" class="modal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <img class="modal-content" id="modalImage">
-</div>
+		<div id="imageModal" class="modal">
+			<span class="close" onclick="closeModal()">&times;</span> <img
+				class="modal-content" id="modalImage">
+		</div>
 
 
 		<button id="upwardButton" onclick="scrollToTop()"
@@ -292,6 +363,7 @@ img {
 
 
 	<script>
+		//For scrolling to top
 		const scrollButton = document.getElementById("upwardButton");
 
 		onscroll = function() {
@@ -315,23 +387,41 @@ img {
 			});
 
 		}
+
+		//For Image enlarging
+		function openModal(imageSrc) {
+			const modal = document.getElementById("imageModal");
+			const modalImage = document.getElementById("modalImage");
+
+			modalImage.src = imageSrc;
+
+			modal.style.display = "block";
+		}
+
+		function closeModal() {
+			const modal = document.getElementById("imageModal");
+
+			modal.style.display = "none";
+		}
+
+		/*   //For searching
+		  document.getElementById("searchButton").addEventListener("click" , function() {
+		      const query =   document.getElementById("searchInput").value.toLowerCase();
+		      const blogs = document.querySelectorAll(".blog-post");
 		
-		
 
-        function openModal(imageSrc){
-            const modal = document.getElementById("imageModal");
-            const modalImage = document.getElementById("modalImage");
+		    blogs.forEach(blog => {
 
-            modalImage.src = imageSrc;
+		        const title = blog.querySelector("h2").innerText.toLowerCase();
 
-            modal.style.display = "block";
-        }
-
-        function closeModal(){
-            const modal = document.getElementById("imageModal");
-
-            modal.style.display = "none";
-        }
+		        if(title.includes(query)){
+		            blog.style.display = "block";
+		        }
+		        else{
+		            blog.style.display = "none";
+		        }
+		    }); 
+		    }); */
 	</script>
 
 </body>

@@ -255,6 +255,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Create Blog</title>
     <style>
         body {
@@ -267,6 +270,29 @@
             align-items: center;
             height: 100vh;
             background: linear-gradient(135deg, #04274d, #04274d);
+        }
+        
+                #back-button {
+            background-color: transparent;
+            border: none;
+            position: fixed;
+            top: 5%;
+            left: 2%;
+            z-index: auto;
+        }
+
+        #back-button button {
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        #back-button button:hover {
+            transform: translateX(-10px);
+            color: #e45c94;
         }
 
         #create-blog {
@@ -452,6 +478,11 @@
 </head>
 
 <body>
+<div id="back-button">
+    <button title="Back" onclick="history.back()">
+        <i class="fa-solid fa-arrow-left"></i> Back
+    </button>
+</div>
     <section id="create-blog">
         <h1>Create Your Blog Post</h1>
         <form action="Create_blog" method="post" enctype="multipart/form-data">

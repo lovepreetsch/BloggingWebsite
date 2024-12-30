@@ -7,6 +7,9 @@ public class blogBeans
 	private String title;
 	private String content;
 	private String image;
+	private String searchKeyword;
+	private String page;
+	private String count;
 
 	public int getUserId()
 	{
@@ -46,6 +49,36 @@ public class blogBeans
 	public void setImage(String image)
 	{
 		this.image = image;
+	}
+
+	public String getSearchKeyword()
+	{
+		return searchKeyword;
+	}
+
+	public void setSearchKeyword(String searchKeyword)
+	{
+		this.searchKeyword = searchKeyword;
+	}
+
+	public String getPage()
+	{
+		return page;
+	}
+
+	public void setPage(String page)
+	{
+		this.page = page;
+	}
+
+	public String getCount()
+	{
+		return count;
+	}
+
+	public void setCount(String count)
+	{
+		this.count = count;
 	}
 
 }

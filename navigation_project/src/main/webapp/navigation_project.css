@@ -327,6 +327,13 @@ nav ul li a:hover {
     width: 600px;
 }
 
+         .errorMessage{
+       	 	color: #ff0077;
+            text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+            margin-left: 105px;
+        }
+
+
 footer{
     display: flex;
     justify-content: center;

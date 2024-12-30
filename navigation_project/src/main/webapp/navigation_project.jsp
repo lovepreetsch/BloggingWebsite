@@ -128,12 +128,23 @@
     </section>
 
     <section id="contact-section">
-        <form action="navigation-project" method="post">
+        <form action="Form" method="post">
         <h1>Contact Us</h1>
         <h3>Please enter your Contact details</h3>
-        <input type="text" name="name" placeholder="Type your Name" id="name">
-        <input type="email" name="email" placeholder="Type your email" id="email">
-        <textarea name="message" placeholder="Type your message..." id="message"></textarea>
+        
+        <!-- For errorMessage -->
+		 <%
+            		String errorMessage = (String) session.getAttribute("errorMessage");
+           			if(errorMessage != null){
+            %> 
+            <div class="errorMessage"><%= errorMessage %></div>
+            <%
+            session.removeAttribute("errorMessage");
+           			}
+            %>
+        <input type="text" name="name" placeholder="Type your Name" id="name" required="required">
+        <input type="email" name="email" placeholder="Type your email" id="email" required="required">
+        <textarea name="message" placeholder="Type your message..." id="message" required="required"></textarea>
        <input type="submit" name="action" value="Send">
 
 
@@ -208,7 +219,12 @@
 
     </section>
     
+<script type="text/javascript">
+		function onclick(){
+				promt
+		}
 
+</script>
 
 
 <!-- <section id="content">
