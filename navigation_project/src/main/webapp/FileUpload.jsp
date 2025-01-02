@@ -7,10 +7,16 @@
 </head> 
 <body>
 
-  <form method="post" action="FileUpload" enctype="multipart/form-data">
+<form method="post" action="FileUpload" enctype="multipart/form-data">
+    <!-- Add the type field -->
+    <input type="hidden" name="type" value="BLOG" />
+    
+    <!-- File input -->
     <input type="file" name="file" />
+    
+    <!-- Submit button -->
     <input type="submit" value="Upload" />
-  </form>
+</form>
 
 </body>
 </html>

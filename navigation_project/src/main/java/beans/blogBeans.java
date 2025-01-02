@@ -8,8 +8,8 @@ public class blogBeans
 	private String content;
 	private String image;
 	private String searchKeyword;
-	private String page;
-	private String count;
+	private int page;
+	private int count;
 
 	public int getUserId()
 	{
@@ -61,22 +61,22 @@ public class blogBeans
 		this.searchKeyword = searchKeyword;
 	}
 
-	public String getPage()
+	public int getPage()
 	{
 		return page;
 	}
 
-	public void setPage(String page)
+	public void setPage(int page)
 	{
 		this.page = page;
 	}
 
-	public String getCount()
+	public int getCount()
 	{
 		return count;
 	}
 
-	public void setCount(String count)
+	public void setCount(int count)
 	{
 		this.count = count;
 	}

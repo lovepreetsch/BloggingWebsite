@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -23,8 +24,8 @@ import util.UtilityClass;
  */
 @WebServlet("/Create_blog")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-		maxFileSize = 1024 * 1024 * 10, // 10MB
-		maxRequestSize = 1024 * 1024 * 50 // 50MB
+		maxFileSize = 1024 * 1024 * 100, // 10MB
+		maxRequestSize = 1024 * 1024 * 500 // 50MB
 )
 public class create_blog extends HttpServlet
 {
@@ -45,6 +46,8 @@ public class create_blog extends HttpServlet
 		String content = request.getParameter("content").trim();
 
 		String uploadPath = "C:\\Users\\Lovepreet singh\\git\\repository\\navigation_project\\src\\main\\webapp\\img";
+
+		System.out.println("create blog image upload:");
 
 		File uploadDir = new File(uploadPath);
 		if(!uploadDir.exists())
@@ -68,6 +71,15 @@ public class create_blog extends HttpServlet
 
 				imageUrl = "img/" + fileName; // Store the relative path to be saved in DB
 			}
+		}
+
+		try
+		{
+			TimeUnit.SECONDS.sleep(2);
+		}
+		catch(InterruptedException e1)
+		{
+			e1.printStackTrace();
 		}
 
 		System.out.println("CreateUserId: " + userId);

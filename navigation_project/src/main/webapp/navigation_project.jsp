@@ -29,7 +29,6 @@
         <!-- <a href="/navigation_project/Logout" class="logout-button">Logout</a> -->
     </nav>
     </section>
-
 <!--     <div  id="home-anime">
        <span><img src="img/rocket.png" alt=""></span> 
     </div> -->
@@ -206,7 +205,7 @@
 			        if (email != null) { 
 			            out.print(email); 
 			        } else { 
-			            out.print("no address found");
+			            out.print("no email found");
 			        } 
    			 %>  </a> <br>
 

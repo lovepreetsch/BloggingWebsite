@@ -1,23 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-                    
+                            
+    
+    
     
     
     
     <wb-module deploy-name="navigation_project">
-                                        
+                                                        
+        
+        
         
         
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-                                        
+                                                        
+        
+        
         
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-                                
+                                                
+        
+        
         
         
         <dependent-module archiveName="mysql-connector-j-8.0.33.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Lovepreet singh/Desktop/mysql-connector-j-8.0.33.jar">
+                                                                        
+            
+            
+            
+            
+            <dependency-type>uses</dependency-type>
+                                                                    
+        
+        
+        
+        
+        </dependent-module>
+                                        
+        
+        
+        
+        <dependent-module archiveName="jstl-1.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Lovepreet singh/Downloads/jstl-1.2.jar">
+                                                            
+            
+            
+            
+            <dependency-type>uses</dependency-type>
+                                                        
+        
+        
+        
+        </dependent-module>
+                                
+        
+        
+        <dependent-module archiveName="mail-1.4.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Lovepreet singh/Downloads/mail-1.4.jar">
                                                 
             
             
@@ -28,7 +67,16 @@
         </dependent-module>
                         
         
-        <dependent-module archiveName="jstl-1.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Lovepreet singh/Downloads/jstl-1.2.jar">
+        <dependent-module archiveName="jersey-media-multipart-2.35.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Lovepreet singh/Downloads/jersey-media-multipart-2.35.jar">
+                                    
+            
+            <dependency-type>uses</dependency-type>
+                                
+        
+        </dependent-module>
+                        
+        
+        <dependent-module archiveName="thumbnailator-0.4.20.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Lovepreet singh/Downloads/thumbnailator-0.4.20.jar">
                                     
             
             <dependency-type>uses</dependency-type>
@@ -36,33 +84,47 @@
         
         </dependent-module>
                 
-        <dependent-module archiveName="mail-1.4.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Lovepreet singh/Downloads/mail-1.4.jar">
+        <dependent-module archiveName="gson-2.11.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Lovepreet singh/Downloads/gson-2.11.0.jar">
                         
             <dependency-type>uses</dependency-type>
                     
         </dependent-module>
-        <dependent-module archiveName="jersey-media-multipart-2.35.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Lovepreet singh/Downloads/jersey-media-multipart-2.35.jar">
+        <dependent-module archiveName="commons-fileupload2-core-2.0.0-M2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Lovepreet singh/Downloads/commons-fileupload2-2.0.0-M2-bin/commons-fileupload2-2.0.0-M2/commons-fileupload2-core-2.0.0-M2.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="thumbnailator-0.4.20.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Lovepreet singh/Downloads/thumbnailator-0.4.20.jar">
+        <dependent-module archiveName="commons-fileupload-1.5.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Lovepreet singh/Downloads/commons-fileupload-1.5.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-                                        
+        <dependent-module archiveName="commons-io-2.18.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Lovepreet singh/Downloads/commons-io-2.18.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="json-20240303.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Lovepreet singh/Downloads/json-20240303.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+                                                        
+        
+        
         
         
         
         <property name="context-root" value="navigation_project"/>
-                                        
+                                                        
+        
+        
         
         
         
         <property name="java-output-path" value="/navigation_project/build/classes"/>
-                                    
+                                                    
+    
+    
     
     
     
     </wb-module>
-                
+                        
+
+
 
 
 

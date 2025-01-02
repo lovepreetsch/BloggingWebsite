@@ -106,6 +106,19 @@ nav {
 	box-shadow: 2px 5px 15px rgba(245, 245, 245, 0.5);
 }
 
+#suggestionBox div {
+    border-bottom: 1px solid #ccc;
+    padding: 8px;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+#suggestionBox div:hover {
+    background-color: #f0f0f0;
+}
+
+
+
 .blog-post {
 	margin: 20px auto;
 	padding: 20px;
@@ -177,6 +190,32 @@ nav {
 	background-color: #0056b3;
 	transform: scale(1.1);
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    list-style: none;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .page-link {
+    color: #007bff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.pagination .active .page-link {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
 
 .modal {
 	display: none; /* Hidden by default */
@@ -266,13 +305,13 @@ img {
 		<div id="search-section">
 			<!-- Search form -->
 			<form action="List_blog" method="get">
-				<input type="text" id="searchInput" name="searchKeyword"
-					placeholder="Search blogs..." />
+				<input type="text" id="searchInput" name="searchKeyword" placeholder="Search blogs..." autocomplete="off"/>
+				<div id="suggestionBox" style="background-color: white; border: 1px solid #ccc; position: absolute; z-index: 1000; display: none;"></div>
 				<button id="searchButton" type="submit">Search</button>
 			</form>
 		</div>
 
-		<div id="autocompleteResults" class="autocomplete-results"></div>
+<!-- 		<div id="autocompleteResults" class="autocomplete-results"></div> -->
 
 		<!-- For errorMessage in center -->
 		<%
@@ -306,6 +345,8 @@ img {
 						</div>
 						<h2>${blog.title}</h2>
 						<p>${blog.content}</p>
+						<span>...</span>
+						<button id="readButton">Read more</button>
 						<div id="image">
 							<%-- <p>http://localhost:8080${pageContext.request.contextPath}/${blog.image }</p> --%>
 							<%-- <c:if test="${not empty blog.image}"
@@ -313,7 +354,7 @@ img {
                 </c:if> --%>
 							<c:choose>
 								<c:when
-									test="${not empty blog.image && blog.image.endsWith('.jpg') || blog.image.endsWith('jpeg') || blog.image.endsWith('png') }">
+									test="${not empty blog.image && blog.image.endsWith('.jpg') || blog.image.endsWith('.jpeg') || blog.image.endsWith('.png') }">
 									<a href="javascript:void(0);"
 										onclick="openModal('http://localhost:8080${pageContext.request.contextPath}/${blog.image}')"><img
 										src="http://localhost:8080${pageContext.request.contextPath}/${blog.image}"
@@ -327,10 +368,17 @@ img {
 										target="_blank">Click here to view the PDF.</a>
 									<!-- </iframe> -->
 								</c:when>
+								
+								<c:when
+									test="${not empty blog.image && blog.image.endsWith('.mp4') || blog.image.endsWith('.mkv')}">
+									<%-- <iframe src="http://localhost:8080${pageContext.request.contextPath}/${blog.image}" alt="Blog Image" style="width: 10%; height: auto;"> --%>
+									<a href="${pageContext.request.contextPath}/${blog.image}"
+										target="_blank">Click here to view the video.</a>
+									<!-- </iframe> -->
+								</c:when>
 
 								<c:otherwise>
-									<p style="color: red;">Unsupported file type. Please upload
-										an image or PDF.</p>
+									<p style="color: red;">No File uploaded</p>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -339,9 +387,21 @@ img {
 			</div>
 		</c:forEach>
 		
-		<div id="paggination">
-			<c:if test="${totalPages > 1 }"></c:if>
-		</div>
+		<div id="pagination-section">
+    <c:if test="${totalPages > 1}">
+        <nav id="page-nav">
+            <ul class="pagination">
+                <c:forEach begin="1" end="${totalPages}" var="page">
+                    <li class="page-item ${page == currentPage ? 'active' : ''}">
+                        <a class="page-link" href="?page=${page}&searchKeyword=${param.searchKeyword}" aria-label="Go to page ${page}">
+                            ${page}
+                        </a>
+                    </li>
+                </c:forEach>
+            </ul>
+        </nav>
+    </c:if>
+</div>
 
 		<!-- Modal for Enlarged Image -->
 		<div id="imageModal" class="modal">
@@ -361,68 +421,7 @@ img {
 		</div>
 	</section>
 
-
-	<script>
-		//For scrolling to top
-		const scrollButton = document.getElementById("upwardButton");
-
-		onscroll = function() {
-			if (document.body.scrollTop > 100
-					|| document.documentElement.scrollTop > 100) {
-
-				scrollButton.style.display = "block";
-
-			} else {
-
-				scrollButton.style.display = "none";
-			}
-		};
-
-		function scrollToTop() {
-			scrollTo({
-
-				top : 0,
-				behavior : "smooth"
-
-			});
-
-		}
-
-		//For Image enlarging
-		function openModal(imageSrc) {
-			const modal = document.getElementById("imageModal");
-			const modalImage = document.getElementById("modalImage");
-
-			modalImage.src = imageSrc;
-
-			modal.style.display = "block";
-		}
-
-		function closeModal() {
-			const modal = document.getElementById("imageModal");
-
-			modal.style.display = "none";
-		}
-
-		/*   //For searching
-		  document.getElementById("searchButton").addEventListener("click" , function() {
-		      const query =   document.getElementById("searchInput").value.toLowerCase();
-		      const blogs = document.querySelectorAll(".blog-post");
-		
-
-		    blogs.forEach(blog => {
-
-		        const title = blog.querySelector("h2").innerText.toLowerCase();
-
-		        if(title.includes(query)){
-		            blog.style.display = "block";
-		        }
-		        else{
-		            blog.style.display = "none";
-		        }
-		    }); 
-		    }); */
-	</script>
+<script src="list_blog.js"></script>
 
 </body>
 </html>

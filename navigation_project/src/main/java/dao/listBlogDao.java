@@ -29,10 +29,10 @@ public class listBlogDao
 
 		listQuery += " ORDER BY created_on DESC ";
 
-		if(UtilityClass.isNull(blog.getPage()) && UtilityClass.isNull(blog.getCount()))
+		if(!UtilityClass.isNull(blog.getPage()) && !UtilityClass.isNull(blog.getCount()))
 		{
-			int count = Integer.parseInt(blog.getCount());
-			int page = (Integer.parseInt(blog.getPage()) - 1) * count;
+			int count = blog.getCount();
+			int page = (blog.getPage() - 1) * count;
 
 			listQuery += "LIMIT " + page + ", " + count;
 		}
@@ -43,7 +43,7 @@ public class listBlogDao
 
 			//			stmt.setInt(1, blog.getUserId());
 
-			//			System.out.println("listBlog: " + stmt);
+			System.out.println("listBlog: " + stmt);
 			resultSet = stmt.executeQuery();
 
 			if(!resultSet.isBeforeFirst())
@@ -110,6 +110,11 @@ public class listBlogDao
 
 		String listQuery = "SELECT COUNT(*) AS total_count FROM blog WHERE user_id = ? ";
 
+		if(!UtilityClass.isNull(blog.getSearchKeyword()))
+		{
+			listQuery += " AND title LIKE '%" + blog.getSearchKeyword() + "%'";
+		}
+
 		try
 		{
 			stmt = ConnectionManager.getConnection().prepareStatement(listQuery);
@@ -155,6 +160,54 @@ public class listBlogDao
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public static List<String> getBlogSuggestions(blogBeans blog)
+	{
+		ResultSet resultSet = null;
+		PreparedStatement stmt = null;
+
+		List<String> suggestions = new ArrayList<>();
+		String sql = "SELECT DISTINCT title, blog.created_on FROM blog WHERE title LIKE ? ORDER BY created_on DESC LIMIT 10 ";
+
+		try
+		{
+			stmt = ConnectionManager.getConnection().prepareStatement(sql);
+
+			stmt.setString(1, "%" + blog.getSearchKeyword() + "%");
+
+			System.out.println("listBlog: " + stmt);
+			resultSet = stmt.executeQuery();
+
+			while(resultSet.next())
+			{
+				suggestions.add(resultSet.getString("title"));
+			}
+
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			try
+			{
+				if(resultSet != null)
+				{
+					resultSet.close();
+				}
+				if(stmt != null)
+				{
+					stmt.close();
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+		return suggestions;
 	}
 
 }
